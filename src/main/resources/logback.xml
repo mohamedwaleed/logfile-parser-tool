@@ -17,7 +17,7 @@
         <appender-ref ref="STDOUT_FEEDBACK" />
     </logger>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT" />
-    </root>
+    <!--<root level="INFO">-->
+        <!--<appender-ref ref="STDOUT" />-->
+    <!--</root>-->
 </configuration>

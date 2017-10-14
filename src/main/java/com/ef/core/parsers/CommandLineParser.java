@@ -12,19 +12,19 @@ import java.util.Map;
  */
 public class CommandLineParser implements Parser {
 
-    private String []requiredKeys = {"startDate", "duration", "threshold"};
+    private String []requiredKeys = {"startDate", "duration", "threshold", "accesslog"};
     @Override
     public Object parse(String ...input) throws ParseException {
-        if(input.length != 3){
-            throw new ParseException("Expected 3 arguments only", 0);
+        if(input.length != requiredKeys.length){
+            throw new ParseException("Expected "+requiredKeys.length+" arguments only", 0);
         }
         Map<String, String> args = new HashMap<>();
         for(String arg: input) {
             String []keyValueArray = arg.split("=");
             String key = keyValueArray[0].trim().substring(2);
             String value = keyValueArray[1].trim();
-            if(Arrays.binarySearch(requiredKeys,key) == -1) {
-                throw new IllegalArgumentException("Unknown key" + key);
+            if(Arrays.asList(requiredKeys).indexOf(key) == -1) {
+                throw new IllegalArgumentException("Unknown key " + key);
             }
             args.put(key, value);
         }
@@ -52,6 +52,9 @@ public class CommandLineParser implements Parser {
                     break;
                 case "threshold":
                     cmdArgs.setThreshold(Integer.valueOf(args.get(key)));
+                    break;
+                case "accesslog":
+                    cmdArgs.setAccessLogPath(args.get(key));
                     break;
             }
         }

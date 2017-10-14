@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface LogRecordRepository {
     void addLogRecords(List<LogRecord> logRecords);
+    List<String> findIpsBetween(String startDate, String endDate, Integer threshold);
 }

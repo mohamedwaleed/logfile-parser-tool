@@ -4,6 +4,8 @@ import com.ef.config.HibernateConfig;
 import com.ef.entities.LogRecord;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import java.util.List;
 
 /**
@@ -21,5 +23,16 @@ public class LogRecordRepositoryImpl implements LogRecordRepository {
         tx.commit();
         session.close();
     }
+
+    @Override
+    public List<String> findIpsBetween(String startDate, String endDate, Integer threshold) {
+        Session session = HibernateConfig.sessionFactory.openSession();
+        Query query = session.createNativeQuery("SELECT ip FROM parser.log_record\n" +
+                "where (`date` between '"+startDate+"' and '"+endDate+"')\n" +
+                "group by ip\n" +
+                "having count(ip) >= "+threshold+";");
+        return query.list();
+    }
+
 
 }

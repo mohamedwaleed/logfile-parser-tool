@@ -16,9 +16,10 @@ public class CommandLineParserTest {
     @Test
     public void testParseHappy() throws ParseException {
         Parser parser = new CommandLineParser();
-        CmdArgs cmdArgs = (CmdArgs) parser.parse("--startDate=2017-01-01.13:00:00","--duration=hourly","--threshold=100");
+        CmdArgs cmdArgs = (CmdArgs) parser.parse("--startDate=2017-01-01.13:00:00","--duration=hourly","--threshold=100","--accesslog=access.log");
         Assert.assertEquals(cmdArgs.getStartDate(), "2017-01-01.13:00:00");
         Assert.assertEquals(cmdArgs.getDuration(), CmdArgs.Duration.HOURLY);
         Assert.assertEquals(cmdArgs.getThreshold(), new Integer(100));
+        Assert.assertEquals(cmdArgs.getAccessLogPath(), "access.log");
     }
 }

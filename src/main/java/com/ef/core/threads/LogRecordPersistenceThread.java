@@ -35,10 +35,9 @@ public class LogRecordPersistenceThread extends Thread {
             }
 
             List<LogRecord> logRecords = queue.poll();
-            System.out.print(".");
+            System.out.print(">");
             logRecordRepository.addLogRecords(logRecords);
         }
-//        System.out.println("thread off");
     }
 
     public void add(List<LogRecord> logRecords) {

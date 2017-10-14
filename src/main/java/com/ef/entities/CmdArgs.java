@@ -11,6 +11,16 @@ public class CmdArgs {
 
     private Integer threshold;
 
+    private String accessLogPath;
+
+    public void setAccessLogPath(String accessLogPath) {
+        this.accessLogPath = accessLogPath;
+    }
+
+    public String getAccessLogPath() {
+        return accessLogPath;
+    }
+
     public enum Duration {
         DAILY("daily"),HOURLY("hourly");
         private String duration;

@@ -24,7 +24,7 @@ public class LogLineParserTest {
 //        Assert.assertEquals(logRecord.getRequest(), "\"GET / HTTP/1.1\"");
 //        Assert.assertEquals(logRecord.getStatus(), "200");
 //        Assert.assertEquals(logRecord.getUserAgent(), "\"swcd (unknown version) CFNetwork/808.2.16 Darwin/15.6.0\"\n");
-        Assert.assertEquals(logRecord.getDate().toString(), "2017-01-01");
+        Assert.assertEquals(logRecord.getDate().toString(), "Sun Jan 01 00:00:11 EET 2017");
     }
 
 }
