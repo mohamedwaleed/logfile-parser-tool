@@ -1,5 +1,6 @@
-package com.ef.config;
+package com.ef.core.parsers.config;
 
+import com.ef.config.HibernateConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
@@ -9,7 +10,7 @@ import org.springframework.context.annotation.Profile;
  */
 @ComponentScan
 @Import(value = {FlywayConfig.class , HibernateConfig.class, PropertyConfig.class})
-@Profile("development")
-public class MainConfig {
+@Profile("test")
+public class MainTestConfig {
 
 }

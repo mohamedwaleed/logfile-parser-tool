@@ -1,4 +1,4 @@
-package com.ef.config;
+package com.ef.core.parsers.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -14,11 +14,10 @@ import java.util.Properties;
  * Created by mohamed on 14/10/17.
  */
 @Configuration
-@Profile("development")
+@Profile("test")
 public class FlywayConfig {
 
     private static final String MIGRATION_SCRIPTS_SCHEMA_TABLE = "migration_scripts_flyway_meta_schema";
-    public static final String CLEAN_MIGRATE = "cleanMigrate";
 
     @Bean
     public Flyway flywayMigrationBean(DataSource dataSource) {
@@ -36,7 +35,7 @@ public class FlywayConfig {
     @Bean
     public DataSource dataSource() throws Exception {
         Properties props = new Properties();
-        props.setProperty("jdbcUrl", "jdbc:mysql://localhost:3306/parser?createDatabaseIfNotExist=true&autoReconnect=true&useUnicode=true&connectionCollation=utf8_general_ci&characterSetResults=utf8&characterEncoding=utf8");
+        props.setProperty("jdbcUrl", "jdbc:h2:mem:parser;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
         props.setProperty("dataSource.user", "root");
         props.setProperty("dataSource.password", "root");
 

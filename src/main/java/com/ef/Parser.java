@@ -17,6 +17,7 @@ import com.ef.utilities.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.StandardEnvironment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -77,7 +78,8 @@ public class Parser {
 
         String endDate = DateUtil.addTo(cmdArgs.getStartDate(), addedHours, "yyyy-MM-dd.HH:mm:ss");
 
-
+        System.out.println(cmdArgs.getStartDate());
+        System.out.println(endDate);
         LogRecordRepository logRecordRepository = new LogRecordRepositoryImpl();
         return logRecordRepository.findIpsBetween(cmdArgs.getStartDate(),endDate,cmdArgs.getThreshold());
     }
@@ -115,6 +117,7 @@ public class Parser {
     }
 
     private static void buildIocContainer() {
+        System.setProperty("spring.profiles.active", "development");
         AnnotationConfigApplicationContext configApplicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
     }
 

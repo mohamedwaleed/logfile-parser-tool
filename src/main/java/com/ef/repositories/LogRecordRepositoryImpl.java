@@ -27,7 +27,7 @@ public class LogRecordRepositoryImpl implements LogRecordRepository {
     @Override
     public List<String> findIpsBetween(String startDate, String endDate, Integer threshold) {
         Session session = HibernateConfig.sessionFactory.openSession();
-        Query query = session.createNativeQuery("SELECT ip FROM parser.log_record\n" +
+        Query query = session.createNativeQuery("SELECT ip FROM log_record\n" +
                 "where (`date` between '"+startDate+"' and '"+endDate+"')\n" +
                 "group by ip\n" +
                 "having count(ip) >= "+threshold+";");

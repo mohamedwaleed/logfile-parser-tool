@@ -3,11 +3,13 @@ package com.ef.config;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 /**
  * Created by mohamed on 12/10/17.
  */
 @org.springframework.context.annotation.Configuration
+@Profile({"development","test"})
 public class HibernateConfig {
 
     public static SessionFactory sessionFactory;
