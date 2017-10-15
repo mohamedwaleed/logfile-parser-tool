@@ -1,4 +1,4 @@
-package com.ef.core;
+package com.ef.core.readers;
 
 import com.ef.core.parsers.LogLineParser;
 import com.ef.core.parsers.Parser;

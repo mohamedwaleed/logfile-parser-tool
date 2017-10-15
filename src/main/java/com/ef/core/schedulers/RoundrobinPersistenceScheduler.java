@@ -1,5 +1,6 @@
-package com.ef.core;
+package com.ef.core.schedulers;
 
+import com.ef.core.schedulers.AbstractPersistentScheduler;
 import com.ef.core.threads.LogRecordPersistenceThread;
 import com.ef.entities.LogRecord;
 

@@ -1,4 +1,4 @@
-package com.ef.core;
+package com.ef.core.schedulers;
 
 /**
  * Created by mohamed on 14/10/17.

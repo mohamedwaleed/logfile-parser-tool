@@ -1,4 +1,4 @@
-package com.ef.core;
+package com.ef.core.readers;
 
 /**
  * Created by mohamed on 13/10/17.
