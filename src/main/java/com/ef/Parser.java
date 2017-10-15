@@ -49,7 +49,7 @@ public class Parser {
 
             HibernateConfig.sessionFactory.close();
 
-        } catch (FileNotFoundException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -118,7 +118,7 @@ public class Parser {
         AnnotationConfigApplicationContext configApplicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
     }
 
-    private static CmdArgs parseCommandLineArgs(String[] args) throws ParseException {
+    private static CmdArgs parseCommandLineArgs(String[] args) throws Exception {
         com.ef.core.parsers.Parser parser = new CommandLineParser();
 
         return (CmdArgs) parser.parse(args);

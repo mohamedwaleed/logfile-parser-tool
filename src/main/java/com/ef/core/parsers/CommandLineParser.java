@@ -2,8 +2,12 @@ package com.ef.core.parsers;
 
 import com.ef.entities.CmdArgs;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +18,7 @@ public class CommandLineParser implements Parser {
 
     private String []requiredKeys = {"startDate", "duration", "threshold", "accesslog"};
     @Override
-    public Object parse(String ...input) throws ParseException {
+    public Object parse(String ...input) throws Exception {
         if(input.length != requiredKeys.length){
             throw new ParseException("Expected "+requiredKeys.length+" arguments only", 0);
         }
@@ -36,7 +40,10 @@ public class CommandLineParser implements Parser {
             }
             switch (key) {
                 case "startDate":
-                    cmdArgs.setStartDate(args.get(key));
+                    String startDate = args.get(key);
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss");
+                    df.parse(startDate);
+                    cmdArgs.setStartDate(startDate);
                     break;
                 case "duration":
                     String value = args.get(key);
@@ -54,6 +61,11 @@ public class CommandLineParser implements Parser {
                     cmdArgs.setThreshold(Integer.valueOf(args.get(key)));
                     break;
                 case "accesslog":
+                    String filePath = args.get(key);
+                    File file = new File(filePath);
+                    if(!file.exists()) {
+                        throw new FileNotFoundException("File " + filePath + " is not exist");
+                    }
                     cmdArgs.setAccessLogPath(args.get(key));
                     break;
             }

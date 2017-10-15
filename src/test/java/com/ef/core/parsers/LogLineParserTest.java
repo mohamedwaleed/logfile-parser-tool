@@ -17,7 +17,7 @@ import java.text.ParseException;
 public class LogLineParserTest {
 
     @Test
-    public void testParseHappy() throws ParseException {
+    public void testParseHappy() throws Exception {
         Parser parser = new LogLineParser("\\|");
         LogRecord logRecord = (LogRecord) parser.parse("2017-01-01 00:00:11.763|192.168.234.82|\"GET / HTTP/1.1\"|200|\"swcd (unknown version) CFNetwork/808.2.16 Darwin/15.6.0\"\n");
         Assert.assertEquals(logRecord.getIp(), "192.168.234.82");

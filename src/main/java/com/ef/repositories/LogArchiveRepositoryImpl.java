@@ -22,7 +22,7 @@ public class LogArchiveRepositoryImpl implements LogArchiveRepository {
             bulkSize++;
             if(bulkSize % 100 == 0) {
                 session.flush();
-                tx.commit();
+                session.clear();
             }
         }
         tx.commit();

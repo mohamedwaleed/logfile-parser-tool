@@ -14,7 +14,7 @@ import java.text.ParseException;
 @RunWith(JUnit4.class)
 public class CommandLineParserTest {
     @Test
-    public void testParseHappy() throws ParseException {
+    public void testParseHappy() throws Exception {
         Parser parser = new CommandLineParser();
         CmdArgs cmdArgs = (CmdArgs) parser.parse("--startDate=2017-01-01.13:00:00","--duration=hourly","--threshold=100","--accesslog=access.log");
         Assert.assertEquals(cmdArgs.getStartDate(), "2017-01-01.13:00:00");

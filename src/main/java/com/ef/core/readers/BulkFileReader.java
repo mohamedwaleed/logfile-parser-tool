@@ -59,7 +59,7 @@ public class BulkFileReader<T> extends AbstractReader implements Iterable<List<T
                 for(String line: linesArray) {
                     logRecords.add((T) parser.parse(line));
                 }
-            } catch (ParseException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return logRecords;
