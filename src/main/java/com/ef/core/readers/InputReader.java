@@ -1,5 +1,8 @@
 package com.ef.core.readers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 
 /**
@@ -7,12 +10,14 @@ import java.io.*;
  */
 public class InputReader implements Reader {
 
+    private final Logger logger = LoggerFactory.getLogger(InputReader.class);
+
     private BufferedReader bufferedReader = null;
 
     public InputReader(File file) throws FileNotFoundException {
         bufferedReader = new BufferedReader(new FileReader(file));
     }
-    public InputReader(InputStream inputStream) throws FileNotFoundException {
+    public InputReader(InputStream inputStream) {
         bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
     }
     public String read(Integer numberOfLines) throws IOException {
@@ -26,23 +31,18 @@ public class InputReader implements Reader {
                 readBuffer.append('\n');
                 currentLine ++;
             }
-            if(line.isEmpty()) {
+            if(line != null && line.isEmpty()) {
+                bufferedReader.close();
                 return null;
             }
-            if(line == null && bufferedReader != null) {
+            if(line == null) {
                 bufferedReader.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return readBuffer.toString();
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        if(bufferedReader != null) {
-            bufferedReader.close();
-        }
-    }
 }

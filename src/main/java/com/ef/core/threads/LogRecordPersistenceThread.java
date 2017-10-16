@@ -3,8 +3,6 @@ package com.ef.core.threads;
 import com.ef.entities.LogRecord;
 import com.ef.repositories.LogRecordRepository;
 import com.ef.repositories.LogRecordRepositoryImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.List;
@@ -21,8 +19,6 @@ public class LogRecordPersistenceThread extends Thread {
     private volatile boolean finished = false;
 
     private LogRecordRepository logRecordRepository = new LogRecordRepositoryImpl();
-
-    private Logger logger = LoggerFactory.getLogger("feedback");
 
     @Override
     public void run() {

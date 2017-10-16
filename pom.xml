@@ -128,4 +128,24 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+
+        <!-- Sonar -->
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>
+                    http://localhost:9000
+                </sonar.host.url>
+                <sonar.exclusions>**/*App.java, **/dtos/*, **/commands/*, **/config/*, **/entities/*</sonar.exclusions>
+
+            </properties>
+        </profile>
+        <!-- Sonar -->
+
+    </profiles>
 </project>

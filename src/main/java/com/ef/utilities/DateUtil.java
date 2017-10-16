@@ -11,6 +11,10 @@ import java.util.GregorianCalendar;
  */
 public class DateUtil {
 
+    private DateUtil() {
+
+    }
+
     public static String addTo(String stringDate, Integer addedHours , String dateFormat) throws ParseException {
         SimpleDateFormat df = new SimpleDateFormat(dateFormat);
         Date d = df.parse(stringDate);

@@ -5,6 +5,7 @@ import com.ef.entities.LogRecord;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mohamed on 14/10/17.
@@ -14,19 +15,15 @@ public class RoundrobinPersistenceScheduler extends AbstractPersistentScheduler 
     private Short currentThread = 0;
     private HashMap<Integer, LogRecordPersistenceThread> threadHashMap = new HashMap<>() ;
 
-    public RoundrobinPersistenceScheduler(Integer numberOfThreads) {
+    public RoundrobinPersistenceScheduler(Integer numberOfThreads) throws InterruptedException {
         super(numberOfThreads);
         init();
     }
 
-    private void init() {
+    private void init() throws InterruptedException {
         for(int i = 0 ; i < this.numberOfThreads ; i ++ ) {
             LogRecordPersistenceThread logRecordPersistenceThread = new LogRecordPersistenceThread();
-            try {
-                logRecordPersistenceThread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            logRecordPersistenceThread.join();
             threadHashMap.put(i, logRecordPersistenceThread);
             logRecordPersistenceThread.start();
         }
@@ -45,7 +42,7 @@ public class RoundrobinPersistenceScheduler extends AbstractPersistentScheduler 
         }
     }
 
-    public HashMap<Integer, LogRecordPersistenceThread> getThreadHashMap(){
+    public Map<Integer, LogRecordPersistenceThread> getThreadHashMap(){
         return this.threadHashMap;
     }
 }

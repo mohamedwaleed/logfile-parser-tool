@@ -121,10 +121,10 @@ public class ParserApplication {
 
     private void buildIocContainer() {
         System.setProperty("spring.profiles.active", "development");
-        AnnotationConfigApplicationContext configApplicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+        new AnnotationConfigApplicationContext(MainConfig.class);
     }
 
-    private CmdArgs parseCommandLineArgs(String[] args) throws Exception {
+    private CmdArgs parseCommandLineArgs(String[] args) throws ParseException {
         com.ef.core.parsers.Parser parser = new CommandLineParser();
 
         return (CmdArgs) parser.parse(args);

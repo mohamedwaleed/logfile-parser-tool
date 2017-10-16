@@ -2,15 +2,20 @@ package com.ef.core.readers;
 
 import com.ef.core.parsers.LogLineParser;
 import com.ef.core.parsers.Parser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by mohamed on 13/10/17.
  */
 public class BulkFileReader<T> extends AbstractReader implements Iterable<List<T>>{
+
+    private final Logger logger = LoggerFactory.getLogger(BulkFileReader.class);
 
     private Integer numberOfLines = 200;
 
@@ -51,13 +56,16 @@ public class BulkFileReader<T> extends AbstractReader implements Iterable<List<T
                     return false;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
             return true;
         }
 
         @Override
         public List<T> next() {
+            if(lines == null) {
+                throw new NoSuchElementException();
+            }
             List<T> logRecords = null;
             try {
                 String[] linesArray = lines.split("\n");
@@ -67,7 +75,7 @@ public class BulkFileReader<T> extends AbstractReader implements Iterable<List<T
                     logRecords.add((T) parser.parse(line));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
             return logRecords;
         }

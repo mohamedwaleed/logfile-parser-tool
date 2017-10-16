@@ -24,12 +24,6 @@ public class LogRecord {
     @Column(name = "request")
     private String request;
 
-//    @Column(name = "status")
-//    private String status;
-//
-//    @Column(name = "user_agent")
-//    private String userAgent;
-
     public Long getId() {
         return id;
     }
@@ -62,20 +56,5 @@ public class LogRecord {
     public void setRequest(String request) {
         this.request = request;
     }
-//
-//    public String getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(String status) {
-//        this.status = status;
-//    }
-//
-//    public String getUserAgent() {
-//        return userAgent;
-//    }
-//
-//    public void setUserAgent(String userAgent) {
-//        this.userAgent = userAgent;
-//    }
+
 }

@@ -23,8 +23,7 @@ public class LogLineParser implements Parser {
         String dateString = tokens[0];
         String ip = tokens[1];
         String request = tokens[2];
-//        String status = tokens[3];
-//        String userAgent = tokens[4];
+
         Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(dateString); // This throws a ParseException
 
         LogRecord logRecord = new LogRecord();

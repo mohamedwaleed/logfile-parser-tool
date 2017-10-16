@@ -2,7 +2,6 @@ package com.ef.repositories;
 
 import com.ef.config.HibernateConfig;
 import com.ef.entities.LogArchive;
-import com.ef.entities.LogRecord;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
