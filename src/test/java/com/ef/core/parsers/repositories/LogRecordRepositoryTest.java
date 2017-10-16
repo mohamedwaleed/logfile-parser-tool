@@ -36,7 +36,9 @@ public class LogRecordRepositoryTest {
     @Before
     public void init() {
         session = HibernateConfig.sessionFactory.openSession();
-        session.createNativeQuery("delete from log_record");
+        Transaction tx = session.beginTransaction();
+        session.createNativeQuery("delete from log_record").executeUpdate();
+        tx.commit();
     }
 
     @Test
