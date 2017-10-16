@@ -1,6 +1,5 @@
 package com.ef.core.schedulers;
 
-import com.ef.core.schedulers.AbstractPersistentScheduler;
 import com.ef.core.threads.LogRecordPersistenceThread;
 import com.ef.entities.LogRecord;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class RoundrobinPersistenceScheduler extends AbstractPersistentScheduler {
 
     private Short currentThread = 0;
-    private HashMap<Integer, LogRecordPersistenceThread> threadHashMap = new HashMap<>();
+    private HashMap<Integer, LogRecordPersistenceThread> threadHashMap = new HashMap<>() ;
 
     public RoundrobinPersistenceScheduler(Integer numberOfThreads) {
         super(numberOfThreads);
@@ -44,5 +43,9 @@ public class RoundrobinPersistenceScheduler extends AbstractPersistentScheduler 
             threadHashMap.get(i).setFinished(true);
             threadHashMap.get(i).join();
         }
+    }
+
+    public HashMap<Integer, LogRecordPersistenceThread> getThreadHashMap(){
+        return this.threadHashMap;
     }
 }

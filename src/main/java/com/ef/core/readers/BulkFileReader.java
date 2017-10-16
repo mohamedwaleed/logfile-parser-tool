@@ -3,7 +3,6 @@ package com.ef.core.readers;
 import com.ef.core.parsers.LogLineParser;
 import com.ef.core.parsers.Parser;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
