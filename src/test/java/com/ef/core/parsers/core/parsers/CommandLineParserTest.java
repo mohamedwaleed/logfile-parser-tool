@@ -1,5 +1,7 @@
-package com.ef.core.parsers;
+package com.ef.core.parsers.core.parsers;
 
+import com.ef.core.parsers.CommandLineParser;
+import com.ef.core.parsers.Parser;
 import com.ef.entities.CmdArgs;
 import org.junit.Assert;
 import org.junit.Test;
