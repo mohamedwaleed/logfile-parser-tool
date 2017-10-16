@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class BulkFileReader<T> extends AbstractReader implements Iterable<List<T>>{
 
-    private static final Integer NUMBER_OF_LINES = 200;
+    private Integer numberOfLines = 200;
 
     private static final Parser parser = new LogLineParser("\\|");
 
@@ -21,8 +21,13 @@ public class BulkFileReader<T> extends AbstractReader implements Iterable<List<T
         super(reader);
     }
 
+    public BulkFileReader(Reader reader, Integer numberOfLines) {
+        super(reader);
+        this.numberOfLines = numberOfLines;
+    }
+
     public Iterator<List<T>> iterator() {
-        return new FileIterator(this.reader);
+        return new FileIterator(this.reader, this.numberOfLines);
     }
 
     class FileIterator implements Iterator<List<T>> {
@@ -31,14 +36,17 @@ public class BulkFileReader<T> extends AbstractReader implements Iterable<List<T
 
         private String lines;
 
-        public FileIterator(Reader reader) {
+        private Integer numberOfLines;
+
+        public FileIterator(Reader reader, Integer numberOfLines) {
             this.reader = reader;
+            this.numberOfLines = numberOfLines;
         }
 
         @Override
         public boolean hasNext() {
             try {
-                lines = this.reader.read(NUMBER_OF_LINES);
+                lines = this.reader.read(numberOfLines);
 
                 if(lines == null) {
                     return false;
