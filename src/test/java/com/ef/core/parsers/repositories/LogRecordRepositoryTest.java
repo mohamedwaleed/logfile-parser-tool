@@ -6,6 +6,7 @@ import com.ef.entities.LogRecord;
 import com.ef.repositories.LogRecordRepository;
 import com.ef.repositories.LogRecordRepositoryImpl;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.junit.After;
 import org.junit.Assert;
@@ -67,17 +68,29 @@ public class LogRecordRepositoryTest {
 
     @Test
     public void testFindIpsBetween() throws ParseException {
-        session.createNativeQuery("insert into log_record(id, ip, date, request) values(1, '192.168.99.217', { ts '2017-01-01 15:00:01.0'}, '')");
-        session.createNativeQuery("insert into log_record(id, ip, date, request) values(2, '192.168.99.218', { ts '2017-01-01 15:00:02.0'}, '')");
-        session.createNativeQuery("insert into log_record(id, ip, date, request) values(3, '192.168.99.219', { ts '2017-01-01 15:00:03.0'}, '')");
-        session.createNativeQuery("insert into log_record(id, ip, date, request) values(4, '192.168.99.217', { ts '2017-01-01 15:00:04.0'}, '')");
-        session.createNativeQuery("insert into log_record(id, ip, date, request) values(5, '192.168.99.217', { ts '2017-01-01 15:00:05.0'}, '')");
+
+        insertLogRecord(1, "192.168.99.217", "2017-01-01 15:00:01", "GET");
+        insertLogRecord(2, "192.168.99.219", "2017-01-01 15:00:02", "GET");
+        insertLogRecord(3, "192.168.99.218", "2017-01-01 15:00:04", "GET");
+        insertLogRecord(4, "192.168.99.217", "2017-01-01 15:00:05", "GET");
+        insertLogRecord(5, "192.168.99.217", "2017-01-01 15:00:06", "GET");
 
         LogRecordRepository logRecordRepository = new LogRecordRepositoryImpl();
-        List<String> ips = logRecordRepository.findIpsBetween("2017-01-01 15:00:00.0", "2017-01-01 15:59:59.0", 0);
+        List<String> ips = logRecordRepository.findIpsBetween("2017-01-01 15:00:00", "2017-01-01 15:59:59", 2);
 
         Assert.assertNotNull(ips);
         Assert.assertEquals(ips.size(), 1);
+    }
+
+    private void insertLogRecord(int id, String ip, String date, String request) {
+        Transaction tx = session.beginTransaction();
+        Query query = session.createNativeQuery("insert into log_record(id, ip, date, request) values(?, ?, ?, ?)");
+        query.setParameter(1, id);
+        query.setParameter(2, ip);
+        query.setParameter(3, date);
+        query.setParameter(4, request);
+        query.executeUpdate();
+        tx.commit();
     }
 
     @After
