@@ -4,6 +4,7 @@ parser in Java that parses web server access log file, loads the log to MySQL an
 # Commands
 | Command | Purpose |
 | ------ | ------ |
+| mvn clean | clean the target directory|
 | mvn compile | compile the project|
 | mvn test | run project unit tests |
 | mvn package | package your code into a jar file in target/ directory |
