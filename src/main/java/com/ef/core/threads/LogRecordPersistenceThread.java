@@ -3,6 +3,8 @@ package com.ef.core.threads;
 import com.ef.entities.LogRecord;
 import com.ef.repositories.LogRecordRepository;
 import com.ef.repositories.LogRecordRepositoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.List;
@@ -20,18 +22,18 @@ public class LogRecordPersistenceThread extends Thread {
 
     private LogRecordRepository logRecordRepository = new LogRecordRepositoryImpl();
 
+    public final Logger logger = LoggerFactory.getLogger("static_log");
+
     @Override
     public void run() {
-        while(true) {
-            if(queue.isEmpty() && finished){
-                break;
-            }
+        while(!(queue.isEmpty() && finished)) {
+
             if(queue.isEmpty()) {
                 continue;
             }
 
             List<LogRecord> logRecords = queue.poll();
-            System.out.print(">");
+            logger.info(">");
             logRecordRepository.addLogRecords(logRecords);
         }
     }

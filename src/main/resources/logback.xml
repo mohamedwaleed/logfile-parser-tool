@@ -6,15 +6,36 @@
         <target>System.err</target>
     </appender>
 
+    <appender name="STDOUT_ERR" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+        <target>System.err</target>
+    </appender>
+
     <appender name="STDOUT_FEEDBACK" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>
         </encoder>
     </appender>
 
+    <appender name="STDOUT_STATIC_LOG" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg</pattern>
+        </encoder>
+    </appender>
 
     <logger name="feedback" level="INFO" additivity="false">
         <appender-ref ref="STDOUT_FEEDBACK" />
     </logger>
+
+    <logger name="static_log" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_STATIC_LOG" />
+    </logger>
+
+    <logger name="error_logger" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_ERR" />
+    </logger>
+
 
 </configuration>

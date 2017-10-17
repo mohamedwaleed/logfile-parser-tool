@@ -31,6 +31,8 @@ public class ParserApplication {
 
     public final Logger logger = LoggerFactory.getLogger("feedback");
 
+    public final Logger errorLogger = LoggerFactory.getLogger("error_logger");
+
     public ParserApplication(String ...commandLineArgs) {
         init(commandLineArgs);
     }
@@ -55,7 +57,7 @@ public class ParserApplication {
             HibernateConfig.sessionFactory.close();
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            errorLogger.info(e.getMessage());
         }
 
 
