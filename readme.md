@@ -10,7 +10,14 @@ parser in Java that parses web server access log file, loads the log to MySQL an
 | mvn package | package your code into a jar file in target/ directory |
 
 # How to run
-java -cp "parser.jar" com.ef.Parser --accesslog=/path/to/file --startDate=2017-01-01.13:00:00 --duration=hourly --threshold=100 
+Make sure that mysql server up and running on default port 3306
+
+Run this command :
+```sh
+java -cp "parser.jar" com.ef.Parser --accesslog=/path/to/file --startDate=2017-01-01.13:00:00 --duration=hourly --threshold=100
+```
+after the application finished , A database called parser will be created and it contains 2 tables (log_record, log_archive)
+The results will be in log_archive
 
 * accesslog: The path of the file that tyou want to make query n it.
 * startDate: the start date of the query.
